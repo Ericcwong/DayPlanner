@@ -10,7 +10,10 @@ function displayCurrentDate(){
     var mm = String(today.getMonth() + 1)
     var yyyy = today.getFullYear();
     today = mm + '/' + dd + '/' + yyyy;
+    currentTime = moment().format('h:mm:ss a');
     $("#currentDay").html(today);
+    $("#currentTime").html(currentTime);
+    return currentTime;
     }
 function displayTime(){
     var times = [
@@ -31,8 +34,11 @@ function displayTime(){
         <div class="hour col-sm-2">${times[i].time}</div>
         <textarea class ="col-sm-9" id="${i}" data-value="${times[i].value}">${userText}</textarea>
         <div class="saveBtn col-sm-1"><i class="far fa-save"></i></div>
-        </div>
         </div>`)
     }
+}
+function currentTimeChecker(){
+    var currentHour = moment().format("hour");
+    console.log(currentHour);
 }
 
