@@ -15,17 +15,17 @@ function displayCurrentDate(){
     $("#currentDay").html(today);
     $("#currentTime").html(currentTime);
     }    
-    var times = [
-        {time: "9 A.M.", value: "9"},
-        {time: "10 A.M.", value: "10"},
-        {time: "11 A.M.", value: "11"},
-        {time: "12 P.M.", value: "12"},
-        {time: "1 P.M.", value: "13"},
-        {time: "2 P.M.", value: "14"},
-        {time: "3 P.M.", value: "15"},
-        {time: "4 P.M.", value: "16"},
-        {time: "5 P.M.", value: "17"},
-    ]
+    // var times = [
+    //     {time: "9 A.M.", value: "9"},
+    //     {time: "10 A.M.", value: "10"},
+    //     {time: "11 A.M.", value: "11"},
+    //     {time: "12 P.M.", value: "12"},
+    //     {time: "1 P.M.", value: "13"},
+    //     {time: "2 P.M.", value: "14"},
+    //     {time: "3 P.M.", value: "15"},
+    //     {time: "4 P.M.", value: "16"},
+    //     {time: "5 P.M.", value: "17"},
+    // ]
     
 // function displayTime(){
 
@@ -41,11 +41,10 @@ function displayCurrentDate(){
 // }
 function currentTimeChecker(){
     // var textarea =  $(".col-sm-9");
-    var currentHour = moment().format("H");
+    var currentHour = moment().hour();
     var textarea =  $("textarea");
     
     for(var c = 0; c < textarea.length; c++){
-        // debugger;
         var plannerTime = textarea[c].dataset.hour;
         if(currentHour > plannerTime){
             $(textarea[c]).addClass("past");
@@ -62,8 +61,8 @@ function currentTimeChecker(){
         // $(textarea).addClass("past");
       
     }
-    console.log(textarea.length)
-    console.log(currentHour);
-    console.log(plannerTime);
-    console.log(time)
+    // console.log(textarea.length)
+    // console.log(currentHour);
+    // console.log(plannerTime);
+    // console.log(time)
 }
