@@ -1,6 +1,6 @@
 $(document).ready(function(){
     displayCurrentDate();
-    displayTime();
+    // displayTime();
     currentTimeChecker();
 });
 
@@ -26,30 +26,37 @@ function displayCurrentDate(){
         {time: "4 P.M.", value: "16"},
         {time: "5 P.M.", value: "17"},
     ]
-function displayTime(){
+    
+// function displayTime(){
 
-    for (var i=0; i<times.length; i++) {
-        userText = ""
-        $(".container").append(`
-        <div class="row">
-        <div class="hour col-sm-2">${times[i].time}</div>
-        <textarea class ="col-sm-9" id="time" value="${times[i].value}">${userText}</textarea>
-        <div class="saveBtn col-sm-1"><i class="far fa-save"></i></div>
-        </div>`)
-    }
-}
+//     for (var i=0; i<times.length; i++) {
+//         userText = ""
+//         $(".container").append(`
+//         <div class="row">
+//         <div class="hour col-sm-2">${times[i].time}</div>
+//         <textarea class ="col-sm-9" id=${i} data-hour="${times[i].value}">${userText}</textarea>
+//         <div class="saveBtn col-sm-1"><i class="far fa-save"></i></div>
+//         </div>`)
+//     }
+// }
 function currentTimeChecker(){
-    var textarea =  $(".col-sm-9");
+    // var textarea =  $(".col-sm-9");
     var currentHour = moment().format("H");
-    var plannerTime = $("#time").val();
+    var textarea =  $("textarea");
+    
     for(var c = 0; c < textarea.length; c++){
-        if(plannerTime > currentHour){
-            $(textarea).addClass("past");
+        // debugger;
+        var plannerTime = textarea[c].dataset.hour;
+        if(currentHour > plannerTime){
+            $(textarea[c]).addClass("past");
         }else if(currentHour == plannerTime){
-            $(textarea).addClass("present");
+            $(textarea[c]).addClass("present");
+            // $(textarea).removeClass("past");
         }
         else{
-            $(textarea).addClass("future");
+            $(textarea[c]).addClass("future");
+            // $(textarea).removeClass("past");
+            // $(textarea).removeClass("present");
         }
         
         // $(textarea).addClass("past");
@@ -60,5 +67,3 @@ function currentTimeChecker(){
     console.log(plannerTime);
     console.log(time)
 }
-
-
