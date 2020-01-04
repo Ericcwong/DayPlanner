@@ -1,6 +1,7 @@
 $(document).ready(function(){
     displayCurrentDate();
     displayTime();
+    currentTimeChecker();
 });
 
 function displayCurrentDate(){
@@ -10,12 +11,10 @@ function displayCurrentDate(){
     var mm = String(today.getMonth() + 1)
     var yyyy = today.getFullYear();
     today = mm + '/' + dd + '/' + yyyy;
-    currentTime = moment().format('h:mm:ss a');
+    currentTime = moment().format('h:mm a');
     $("#currentDay").html(today);
     $("#currentTime").html(currentTime);
-    return currentTime;
-    }
-function displayTime(){
+    }    
     var times = [
         {time: "9 A.M.", value: "9"},
         {time: "10 A.M.", value: "10"},
@@ -27,18 +26,39 @@ function displayTime(){
         {time: "4 P.M.", value: "16"},
         {time: "5 P.M.", value: "17"},
     ]
+function displayTime(){
+
     for (var i=0; i<times.length; i++) {
         userText = ""
         $(".container").append(`
         <div class="row">
         <div class="hour col-sm-2">${times[i].time}</div>
-        <textarea class ="col-sm-9" id="${i}" data-value="${times[i].value}">${userText}</textarea>
+        <textarea class ="col-sm-9" id="time" value="${times[i].value}">${userText}</textarea>
         <div class="saveBtn col-sm-1"><i class="far fa-save"></i></div>
         </div>`)
     }
 }
 function currentTimeChecker(){
-    var currentHour = moment().format("hour");
+    var textarea =  $(".col-sm-9");
+    var currentHour = moment().format("H");
+    var plannerTime = $("#time").val();
+    for(var c = 0; c < textarea.length; c++){
+        if(plannerTime > currentHour){
+            $(textarea).addClass("past");
+        }else if(currentHour == plannerTime){
+            $(textarea).addClass("present");
+        }
+        else{
+            $(textarea).addClass("future");
+        }
+        
+        // $(textarea).addClass("past");
+      
+    }
+    console.log(textarea.length)
     console.log(currentHour);
+    console.log(plannerTime);
+    console.log(time)
 }
+
 
