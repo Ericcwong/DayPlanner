@@ -1,9 +1,10 @@
 $(document).ready(function(){
     displayCurrentDate();
-    // displayTime();
     currentTimeChecker();
+    
+    
 });
-
+var textarea = $("textarea");
 function displayCurrentDate(){
     /*This displays the date in the jumbotron*/
     var today = new Date();
@@ -14,33 +15,9 @@ function displayCurrentDate(){
     currentTime = moment().format('h:mm a');
     $("#currentDay").html(today);
     $("#currentTime").html(currentTime);
-    }    
-    // var times = [
-    //     {time: "9 A.M.", value: "9"},
-    //     {time: "10 A.M.", value: "10"},
-    //     {time: "11 A.M.", value: "11"},
-    //     {time: "12 P.M.", value: "12"},
-    //     {time: "1 P.M.", value: "13"},
-    //     {time: "2 P.M.", value: "14"},
-    //     {time: "3 P.M.", value: "15"},
-    //     {time: "4 P.M.", value: "16"},
-    //     {time: "5 P.M.", value: "17"},
-    // ]
-    
-// function displayTime(){
+}    
 
-//     for (var i=0; i<times.length; i++) {
-//         userText = ""
-//         $(".container").append(`
-//         <div class="row">
-//         <div class="hour col-sm-2">${times[i].time}</div>
-//         <textarea class ="col-sm-9" id=${i} data-hour="${times[i].value}">${userText}</textarea>
-//         <div class="saveBtn col-sm-1"><i class="far fa-save"></i></div>
-//         </div>`)
-//     }
-// }
 function currentTimeChecker(){
-    // var textarea =  $(".col-sm-9");
     var currentHour = moment().hour();
     var textarea =  $("textarea");
     
@@ -50,19 +27,32 @@ function currentTimeChecker(){
             $(textarea[c]).addClass("past");
         }else if(currentHour == plannerTime){
             $(textarea[c]).addClass("present");
-            // $(textarea).removeClass("past");
         }
         else{
             $(textarea[c]).addClass("future");
-            // $(textarea).removeClass("past");
-            // $(textarea).removeClass("present");
+
         }
-        
-        // $(textarea).addClass("past");
-      
     }
-    // console.log(textarea.length)
-    // console.log(currentHour);
-    // console.log(plannerTime);
-    // console.log(time)
 }
+$(".saveBtn").on("click", function(event){
+    var userInputsValue = $(this).siblings("textarea").val();
+    var dataHour = $(this).siblings("textarea").attr("data-hour");
+    localStorage.setItem(dataHour, userInputsValue);
+});
+function pullLocalStorage(){
+    $("#9").val(localStorage.getItem("9"));
+    $("#10").val(localStorage.getItem("10"));
+    $( "#11").val(localStorage.getItem("11"));
+    $("#12").val(localStorage.getItem("12"));
+    $("#13").val(localStorage.getItem("13"));
+    $("#14").val(localStorage.getItem("14"));
+    $("#15").val(localStorage.getItem("15"));
+    $("#16").val(localStorage.getItem("16"));
+    $("#17").val(localStorage.getItem("17"));
+}
+pullLocalStorage();
+
+$("#clearSchedule").on("click",function(){
+    localStorage.clear();
+    location.reload();
+});
